@@ -17,7 +17,6 @@ export function useFetchMovies() {
       },
     }).then((result) => {
       setLoading(false);
-      console.log(page);
       setMovies([...movies, ...(result?.data?.data?.movies ?? [])]);
     });
   }

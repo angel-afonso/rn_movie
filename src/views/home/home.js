@@ -5,11 +5,15 @@ import {useFetchMovies} from './functions';
 import {ActivityIndicator, View} from 'react-native';
 import styles from './styles';
 
-export default function Home() {
+export default function Home({navigation}) {
   const [movies, loading, nextPage, restartPage] = useFetchMovies();
 
+  function onPress(movie) {
+    navigation.push('details', {id: movie.id});
+  }
+
   function renderMovie({item}) {
-    return <MovieCard key={item.id} movie={item} />;
+    return <MovieCard key={item.id} movie={item} onPress={onPress} />;
   }
 
   function listFooter() {
@@ -23,16 +27,14 @@ export default function Home() {
   }
 
   return (
-    <>
-      <FlatList
-        data={movies}
-        numColumns={3}
-        onRefresh={restartPage}
-        renderItem={renderMovie}
-        onEndReached={nextPage}
-        onEndReachedThreshold={0.5}
-        ListFooterComponent={listFooter()}
-      />
-    </>
+    <FlatList
+      data={movies}
+      numColumns={3}
+      onRefresh={restartPage}
+      renderItem={renderMovie}
+      onEndReached={nextPage}
+      onEndReachedThreshold={0.5}
+      ListFooterComponent={listFooter()}
+    />
   );
 }
