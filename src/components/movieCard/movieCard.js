@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, Pressable, Text, View} from 'react-native';
 import styles from './styles';
-
+import {useGoToDetails} from './functions';
 /**
  * @typedef Movie
  * @prop {string} medium_cover_image
@@ -10,13 +10,11 @@ import styles from './styles';
  * @param {{movie}} props
  *
  */
-export default function MovieCard({movie, onPress}) {
-  function onPressCard() {
-    onPress(movie);
-  }
+export default function MovieCard({movie}) {
+  const goToDetails = useGoToDetails(movie.id);
 
   return (
-    <View style={styles.container} onPress={onPressCard}>
+    <Pressable style={styles.container} onPress={goToDetails}>
       <Image
         source={{
           uri: movie.medium_cover_image,
@@ -24,6 +22,6 @@ export default function MovieCard({movie, onPress}) {
         style={styles.image}
       />
       <Text style={styles.title}>{movie.title}</Text>
-    </View>
+    </Pressable>
   );
 }

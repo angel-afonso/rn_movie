@@ -3,6 +3,9 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import routes from './routes/routeList';
+import Axios from 'axios';
+
+Axios.defaults.baseURL = 'https://yts.mx/api/v2';
 
 const Stack = createStackNavigator();
 

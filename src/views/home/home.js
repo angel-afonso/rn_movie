@@ -5,15 +5,11 @@ import {useFetchMovies} from './functions';
 import {ActivityIndicator, View} from 'react-native';
 import styles from './styles';
 
-export default function Home({navigation}) {
+export default function Home() {
   const [movies, loading, nextPage, restartPage] = useFetchMovies();
 
-  function onPress(movie) {
-    navigation.push('details', {id: movie.id});
-  }
-
   function renderMovie({item}) {
-    return <MovieCard key={item.id} movie={item} onPress={onPress} />;
+    return <MovieCard key={item.id} movie={item} />;
   }
 
   function listFooter() {
